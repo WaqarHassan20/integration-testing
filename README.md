@@ -17,20 +17,6 @@
 
 ---
 
-## 📋 Table of Contents
-
-- [About](#-about)
-- [Features](#-features)
-- [Tech Stack](#-tech-stack)
-- [Quick Start](#-quick-start)
-- [Testing](#-testing)
-- [CI/CD Pipeline](#-cicd-pipeline)
-- [Project Structure](#-project-structure)
-- [Contributing](#-contributing)
-- [License](#-license)
-
----
-
 ## 🎯 About
 
 A comprehensive testing repository demonstrating **Integration Testing** and **End-to-End Testing** practices using modern JavaScript/TypeScript tools. This project showcases best practices for testing Express.js APIs with database interactions, mocking strategies, and automated CI/CD workflows.
@@ -76,105 +62,6 @@ Perfect for developers looking to learn or implement robust testing strategies i
 
 ---
 
-## 🚀 Quick Start
-
-### Prerequisites
-
-- [Bun](https://bun.sh) v1.0 or higher
-- Git
-- A database (PostgreSQL, MySQL, or SQLite)
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/WaqarHassan20/integration-and-end-to-end-testing.git
-
-# Navigate to the project
-cd integration-and-end-to-end-testing
-
-# Navigate to integration testing folder
-cd 01_Integration-testing
-
-# Install dependencies
-bun install
-
-# Generate Prisma Client
-bunx prisma generate
-
-# Set up your database (update .env with your DATABASE_URL)
-bunx prisma migrate dev
-
-# Run the application
-bun run start
-```
-
----
-
-## 🧪 Testing
-
-### Run Tests
-
-```bash
-# Run all tests
-bun run test
-
-# Run tests in watch mode
-bun run test --watch
-
-# Run tests with coverage
-bun run test --coverage
-
-# Run tests in UI mode
-bun run test --ui
-```
-
-### Test Structure
-
-```
-01_Integration-testing/
-├── src/
-│   ├── test/
-│   │   └── sum.test.ts          # Integration tests
-│   ├── __mocks__/
-│   │   └── db.ts                # Database mocks
-│   └── utils/
-│       └── user/
-│           └── __mocks__/       # User utility mocks
-```
-
-### Example Test
-
-```typescript
-import { describe, it, expect, vi } from "vitest";
-import { prismaClient } from "../__mocks__/db";
-import request from "supertest";
-import { app } from "..";
-
-vi.mock("../db");
-
-describe("POST /sum", () => {
-  it("should return the sum of two numbers", async () => {
-    prismaClient.sum.create.mockResolvedValue({
-      id: 12,
-      a: 5,
-      b: 7,
-      answer: 12,
-      type: "sum",
-    });
-
-    const response = await request(app)
-      .post("/sum")
-      .send({ a: 5, b: 7 });
-
-    expect(response.status).toBe(200);
-    expect(response.body.answer).toBe(12);
-  });
-});
-```
-
----
-
 ## 🔄 CI/CD Pipeline
 
 ### GitHub Actions Workflow
@@ -202,32 +89,6 @@ on:
 
 ---
 
-## 📁 Project Structure
-
-```
-integration-and-end-to-end-testing/
-├── .github/
-│   └── workflows/
-│       └── test.yaml              # CI/CD pipeline configuration
-├── 01_Integration-testing/
-│   ├── prisma/
-│   │   └── schema.prisma          # Database schema
-│   ├── src/
-│   │   ├── __mocks__/             # Mock implementations
-│   │   ├── generated/             # Prisma generated files
-│   │   ├── test/                  # Test files
-│   │   ├── utils/                 # Utility functions
-│   │   ├── app.ts                 # Express app setup
-│   │   ├── db.ts                  # Database connection
-│   │   └── index.ts               # Entry point
-│   ├── package.json
-│   └── tsconfig.json
-├── 02_End-to-End-testing/         # E2E testing (coming soon)
-└── README.md
-```
-
----
-
 ## 🎯 Testing Best Practices
 
 ### ✅ What We Cover
@@ -245,40 +106,6 @@ integration-and-end-to-end-testing/
 3. **Async Testing** - Handling promises and async operations
 4. **Test Organization** - Structuring tests with `describe` and `it` blocks
 5. **CI/CD Integration** - Automated testing on every PR
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Here's how you can help:
-
-1. 🍴 Fork the repository
-2. 🔧 Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. 💾 Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. 📤 Push to the branch (`git push origin feature/amazing-feature`)
-5. 🎉 Open a Pull Request
-
-### Development Workflow
-
-```bash
-# Create a new branch
-git checkout -b feature/my-feature
-
-# Make your changes and test
-bun run test
-
-# Commit with conventional commits
-git commit -m "feat: add new testing feature"
-
-# Push and create PR
-git push origin feature/my-feature
-```
-
----
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
