@@ -24,4 +24,4 @@ jobs:
 
       - name: Run tests (Vitest with Supertest & Mocks)
         working-directory: 01_Integration-testing
-        run: bun run test
+        run: bun run test --run
