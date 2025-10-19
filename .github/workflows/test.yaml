@@ -28,13 +28,12 @@ jobs:
         uses: docker/setup-compose-action@v1
 
       - name: Ensure Docker Compose is available
-        run:  docker compose version
+        run:  docker-compose version
 
       - name: Copy .env.example to .env
-        run:  cp ./01_Integration-testing/.env.example ./01_Integration-testing/.env
+        run:  cp ./01_Integration-Testing/.env.example ./01_Integration-Testing/.env
         
       - name: Run Integration Tests
         run:  |
-          cd 01_Integration-testing
+          cd 01_Integration-Testing
           bun run test:integration
-            
