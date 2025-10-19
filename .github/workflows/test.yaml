@@ -1,0 +1,39 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:      
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        
+      - name: Set up Docker Compose
+        uses: docker/setup-qemu-action@v2
+
+      - name: Ensure Docker Compose is available
+        run:  docker-compose version
+
+      - name: Copy .env.example to .env
+        run:  cp ./01_Integration-testing/.env.example ./01_Integration-testing/.env
+        
+      - name: Run Integration Tests
+        run:  |
+          cd 01_Integration-testing
+          bun run test:integration
