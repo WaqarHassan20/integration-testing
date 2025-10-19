@@ -1,3 +1,14 @@
+## The whole workflow of the testing any projects by integrations test method :
+
+- write the code of the project to be tested.
+- create a test file with integration tests.
+- set up Vitest and Bun and all other dependencies
+- write the docker compose file to run the services required for testing.
+- write the shell scripts to run the yaml file
+- Now add the yaml file to the github workflows to run the tests on every push and pull request.
+
+-----------------------------------------------------------------------------------------------
+
 ## Vitest lifecycle helpers: beforeAll and beforeEach
 
 This document explains the common usage patterns for Vitest's `beforeAll` and `beforeEach` hooks in TypeScript with Bun as the runtime, with examples tailored to the repository's structure (for example, using the `reset-db` helper under `src/tests/helpers`).
